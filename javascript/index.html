@@ -6,6 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>JS Örnek</title>
     <style>
+      #container {
+        margin: auto;
+      }
+
       #styleSettings {
         background-color: rgba(128, 128, 128, 0.5);
         width: 200px;
@@ -28,20 +32,32 @@
       <form>
         <label for="inpHeadingColor">Başlık Rengi</label>
         <input type="color" id="inpHeadingColor" value="#ff00ff" />
+        <hr />
+        <label for="inpContainerWidthRange">Container width (%)</label>
+        <input
+          type="range"
+          id="inpContainerWidthRange"
+          name="inpContainerWidthRange"
+          min="20"
+          max="100"
+          value="100"
+        />
       </form>
     </div>
-    <h1 id="mainHeading">Burası başlık</h1>
-    <p>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci quas ratione in velit
-      pariatur, veritatis, iste, quis molestias est porro unde tempora rerum. Tenetur sequi dolores
-      quasi ipsa culpa distinctio.
-    </p>
-    <hr />
-    <form action="" id="exampleForm">
-      <label for="inputExample">Input Example</label>
-      <input type="text" id="inputExample" name="example" value="İlk değer" />
-      <button type="submit">Test Button</button>
-    </form>
+    <div id="container">
+      <h1 id="mainHeading">Burası başlık</h1>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci quas ratione in velit
+        pariatur, veritatis, iste, quis molestias est porro unde tempora rerum. Tenetur sequi
+        dolores quasi ipsa culpa distinctio.
+      </p>
+      <hr />
+      <form action="" id="exampleForm">
+        <label for="inputExample">Input Example</label>
+        <input type="text" id="inputExample" name="example" value="İlk değer" />
+        <button type="submit">Test Button</button>
+      </form>
+    </div>
     <script>
       if (localStorage.getItem("mainHeadingText")) {
         document.getElementById("inputExample").value = localStorage.getItem("mainHeadingText");
@@ -49,6 +65,11 @@
 
       if (localStorage.getItem("mainHeadingColor")) {
         document.getElementById("inpHeadingColor").value = localStorage.getItem("mainHeadingColor");
+      }
+
+      if (localStorage.getItem("containerWidth")) {
+        document.getElementById("inpContainerWidthRange").value =
+          localStorage.getItem("containerWidth");
       }
 
       function setMainHeadingText() {
@@ -63,11 +84,21 @@
         document.getElementById("mainHeading").style.color = newColorValue;
       }
 
+      function setContainerWidth() {
+        var newTextValue = document.getElementById("inpContainerWidthRange").value;
+        localStorage.setItem("containerWidth", newTextValue);
+        document.getElementById("container").style.width = newTextValue + "%";
+      }
+
       setMainHeadingText();
       setMainHeadingColor();
+      setContainerWidth();
 
       document.getElementById("inputExample").addEventListener("input", setMainHeadingText);
       document.getElementById("inpHeadingColor").addEventListener("input", setMainHeadingColor);
+      document
+        .getElementById("inpContainerWidthRange")
+        .addEventListener("input", setContainerWidth);
     </script>
   </body>
 </html>
