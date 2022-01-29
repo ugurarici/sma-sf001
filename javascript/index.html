@@ -43,27 +43,31 @@
       <button type="submit">Test Button</button>
     </form>
     <script>
+      if (localStorage.getItem("mainHeadingText")) {
+        document.getElementById("inputExample").value = localStorage.getItem("mainHeadingText");
+      }
+
+      if (localStorage.getItem("mainHeadingColor")) {
+        document.getElementById("inpHeadingColor").value = localStorage.getItem("mainHeadingColor");
+      }
+
       function setMainHeadingText() {
-        document.getElementById("mainHeading").innerText =
-          document.getElementById("inputExample").value;
+        var newTextValue = document.getElementById("inputExample").value;
+        localStorage.setItem("mainHeadingText", newTextValue);
+        document.getElementById("mainHeading").innerText = newTextValue;
+      }
+
+      function setMainHeadingColor() {
+        var newColorValue = document.getElementById("inpHeadingColor").value;
+        localStorage.setItem("mainHeadingColor", newColorValue);
+        document.getElementById("mainHeading").style.color = newColorValue;
       }
 
       setMainHeadingText();
-
-      document.getElementById("inputExample").addEventListener("input", function (event) {
-        setMainHeadingText();
-      });
-
-      function setMainHeadingColor() {
-        document.getElementById("mainHeading").style.color =
-          document.getElementById("inpHeadingColor").value;
-      }
-
       setMainHeadingColor();
 
-      document.getElementById("inpHeadingColor").addEventListener("input", function (event) {
-        setMainHeadingColor();
-      });
+      document.getElementById("inputExample").addEventListener("input", setMainHeadingText);
+      document.getElementById("inpHeadingColor").addEventListener("input", setMainHeadingColor);
     </script>
   </body>
 </html>
