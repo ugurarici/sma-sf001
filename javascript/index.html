@@ -6,13 +6,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>JS Örnek</title>
     <style>
-      #anabaslik {
-        color: red;
+      #styleSettings {
+        background-color: rgba(128, 128, 128, 0.5);
+        width: 200px;
+        height: 100%;
+        display: inline-block;
+        position: fixed;
+        right: -190px;
+        top: 0;
+        padding: 0.5em;
+        transition: right ease 500ms;
+      }
+
+      #styleSettings:hover {
+        right: 0;
       }
     </style>
   </head>
   <body>
-    <h1 id="anabaslik">Burası başlık</h1>
+    <div id="styleSettings">
+      <form>
+        <label for="inpHeadingColor">Başlık Rengi</label>
+        <input type="color" id="inpHeadingColor" value="#ff00ff" />
+      </form>
+    </div>
+    <h1 id="mainHeading">Burası başlık</h1>
     <p>
       Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci quas ratione in velit
       pariatur, veritatis, iste, quis molestias est porro unde tempora rerum. Tenetur sequi dolores
@@ -25,11 +43,26 @@
       <button type="submit">Test Button</button>
     </form>
     <script>
-      document.getElementById("anabaslik").innerText =
-        document.getElementById("inputExample").value;
+      function setMainHeadingText() {
+        document.getElementById("mainHeading").innerText =
+          document.getElementById("inputExample").value;
+      }
 
-      document.getElementById("inputExample").addEventListener("keyup", function (event) {
-        document.getElementById("anabaslik").innerText = event.target.value;
+      setMainHeadingText();
+
+      document.getElementById("inputExample").addEventListener("input", function (event) {
+        setMainHeadingText();
+      });
+
+      function setMainHeadingColor() {
+        document.getElementById("mainHeading").style.color =
+          document.getElementById("inpHeadingColor").value;
+      }
+
+      setMainHeadingColor();
+
+      document.getElementById("inpHeadingColor").addEventListener("input", function (event) {
+        setMainHeadingColor();
       });
     </script>
   </body>
