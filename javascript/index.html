@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JS Örnek</title>
+    <style>
+      #anabaslik {
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 id="anabaslik">Burası başlık</h1>
+    <p>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci quas ratione in velit
+      pariatur, veritatis, iste, quis molestias est porro unde tempora rerum. Tenetur sequi dolores
+      quasi ipsa culpa distinctio.
+    </p>
+    <hr />
+    <form action="" id="exampleForm">
+      <label for="inputExample">Input Example</label>
+      <input type="text" id="inputExample" name="example" value="İlk değer" />
+      <button type="submit">Test Button</button>
+    </form>
+    <script>
+      document.getElementById("anabaslik").innerText =
+        document.getElementById("inputExample").value;
+
+      document.getElementById("inputExample").addEventListener("keyup", function (event) {
+        document.getElementById("anabaslik").innerText = event.target.value;
+      });
+    </script>
+  </body>
+</html>
