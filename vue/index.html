@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue Example</title>
+  </head>
+  <body>
+    <div id="app">
+      <input type="range" min="20" max="100" v-model="containerWidth" /> {{ containerWidth }}
+      <div id="container" :style="{width: containerWidth + '%'}" style="margin: auto">
+        <h1 v-bind:style="{ color: headingColor }">{{ heading }}</h1>
+        <input type="text" v-model="heading" />
+        <hr />
+        <input type="color" v-model="headingColor" />
+        <hr />
+      </div>
+    </div>
+    <!-- development version, includes helpful console warnings -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script>
+      var app = new Vue({
+        el: "#app",
+        data: {
+          heading: "Initial heading",
+          headingColor: "#ff0000",
+          containerWidth: 50,
+        },
+      });
+    </script>
+  </body>
+</html>
