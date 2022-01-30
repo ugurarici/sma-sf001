@@ -181,6 +181,28 @@
           containerWidth: 50,
           settingsPanelVisibility: false,
         },
+        beforeMount() {
+          if (localStorage.getItem("heading")) {
+            this.heading = localStorage.getItem("heading");
+          }
+          if (localStorage.getItem("headingColor")) {
+            this.headingColor = localStorage.getItem("headingColor");
+          }
+          if (localStorage.getItem("containerWidth")) {
+            this.containerWidth = localStorage.getItem("containerWidth");
+          }
+        },
+        watch: {
+          heading(newValue) {
+            localStorage.setItem("heading", newValue);
+          },
+          headingColor(newValue) {
+            localStorage.setItem("headingColor", newValue);
+          },
+          containerWidth(newValue) {
+            localStorage.setItem("containerWidth", newValue);
+          },
+        },
       });
     </script>
   </body>
