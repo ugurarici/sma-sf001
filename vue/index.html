@@ -23,12 +23,7 @@
         padding: 10px;
         background-color: #212121;
         color: #ccc;
-        display: none;
         font-family: sans-serif;
-      }
-
-      .bottomBar.active {
-        display: block;
       }
 
       #styleSettings {
@@ -153,7 +148,7 @@
           </svg>
         </div>
         <form>
-          <input type="checkbox" name="inpEditActivated" id="inpEditActivated" value="1" />
+          <input type="checkbox" v-model="editing" name="inpEditActivated" id="inpEditActivated" />
           <label for="inpEditActivated">Edit Activated</label>
           <hr />
           <label for="inpHeadingColor">Heading Color</label>
@@ -163,12 +158,19 @@
           <input type="range" min="20" max="100" v-model="containerWidth" />
         </form>
       </div>
-      <div id="container" :style="{width: containerWidth + '%'}">
+      <div
+        id="container"
+        :style="{width: containerWidth + '%'}"
+        @mouseover="containerOnMouseover"
+        @click="containerOnClick"
+        @mouseout="containerOnMouseout"
+      >
         <h1 v-bind:style="{ color: headingColor }">{{ heading }}</h1>
         <hr />
         <input type="text" v-model="heading" />
         <hr />
       </div>
+      <div class="bottomBar" v-if="editing">{{ bottomBarText }}</div>
     </div>
     <!-- development version, includes helpful console warnings -->
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
@@ -180,6 +182,8 @@
           headingColor: "#ff0000",
           containerWidth: 50,
           settingsPanelVisibility: false,
+          editing: false,
+          bottomBarText: "Hover an element to see it's tag name.",
         },
         beforeMount() {
           if (localStorage.getItem("heading")) {
@@ -201,6 +205,22 @@
           },
           containerWidth(newValue) {
             localStorage.setItem("containerWidth", newValue);
+          },
+        },
+        methods: {
+          containerOnMouseover(event) {
+            if (this.editing) {
+              console.log(event);
+              this.bottomBarText = event.target.tagName;
+            }
+          },
+          containerOnClick(event) {
+            if (this.editing) {
+              console.log(event);
+            }
+          },
+          containerOnMouseout(event) {
+            this.bottomBarText = "Hover an element to see it's tag name.";
           },
         },
       });
