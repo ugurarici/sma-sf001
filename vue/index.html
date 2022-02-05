@@ -160,7 +160,7 @@
       </div>
       <div
         id="container"
-        :style="{width: containerWidth + '%'}"
+        :style="{width: containerWidthWithPercent}"
         @mouseover="containerOnMouseover"
         @click="containerOnClick"
         @mouseout="containerOnMouseout"
@@ -184,6 +184,11 @@
           settingsPanelVisibility: false,
           editing: false,
           bottomBarText: "Hover an element to see it's tag name.",
+        },
+        computed: {
+          containerWidthWithPercent() {
+            return this.containerWidth + "%";
+          },
         },
         beforeMount() {
           if (localStorage.getItem("heading")) {
