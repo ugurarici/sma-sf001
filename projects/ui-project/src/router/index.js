@@ -23,13 +23,19 @@ const routes = [
     path: "/profile",
     name: "Profile",
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/Profile.vue"),
+      import(/* webpackChunkName: "profile" */ "../views/Profile.vue"),
   },
   {
     path: "/counter",
     name: "Counter",
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/Counter.vue"),
+      import(/* webpackChunkName: "counter" */ "../views/Counter.vue"),
+  },
+  {
+    path: "/pokemon/:name",
+    name: "Pokemon Detail",
+    component: () =>
+      import(/* webpackChunkName: "pokedetail" */ "../views/PokemonDetail.vue"),
   },
 ];
 

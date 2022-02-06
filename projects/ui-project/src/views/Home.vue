@@ -1,6 +1,16 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
+    <template v-if="pokemon">
+      <img
+        v-if="pokemon.sprites.front_default"
+        alt="Vue logo"
+        :src="pokemon.sprites.front_default"
+      />
+      <p v-if="pokemon.name">{{ pokemon.name }}</p>
+    </template>
+
+    <img v-else alt="Vue logo" src="../assets/logo.png" />
+
     <hr />
     Count: {{ count }}
     <hr />
@@ -14,6 +24,11 @@ import HelloWorld from "@/components/HelloWorld.vue";
 
 export default {
   name: "Home",
+  data() {
+    return {
+      pokemon: null,
+    };
+  },
   components: {
     HelloWorld,
   },
@@ -21,6 +36,13 @@ export default {
     count() {
       return this.$store.state.count;
     },
+  },
+  beforeMount() {
+    fetch("https://pokeapi.co/api/v2/pokemon/pikachu")
+      .then((response) => response.json())
+      .then((data) => {
+        this.pokemon = data;
+      });
   },
 };
 </script>

@@ -7,6 +7,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     count: 0,
+    demo: "burayı da ekledik",
   },
   mutations: {
     increment(state) {
@@ -21,5 +22,9 @@ export default new Vuex.Store({
   },
   actions: {},
   modules: {},
-  plugins: [createPersistedState()],
+  plugins: [
+    createPersistedState({
+      paths: ["count"],
+    }),
+  ],
 });
